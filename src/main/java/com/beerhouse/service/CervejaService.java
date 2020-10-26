@@ -18,8 +18,8 @@ public class CervejaService {
         return cervejaRepository.findAll();
     }
 
-    public Optional<Cerveja> buscarPorId(Long id) {
-        return Optional.ofNullable(cervejaRepository.findById(id)
+    public Optional<Cerveja> buscarPorMarca(String marca) {
+        return Optional.ofNullable(cervejaRepository.findByMarca(marca)
                 .orElseThrow(() -> new IllegalArgumentException("Produto inexistente")));
     }
 
