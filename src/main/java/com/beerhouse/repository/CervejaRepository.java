@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface CervejaRepository extends JpaRepository<Cerveja, Long> {
 
     Optional<Cerveja> findById(Long id);
+    Optional<Cerveja> findByMarca(String marca);
 }
