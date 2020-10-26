@@ -33,4 +33,7 @@ public class Cerveja implements Serializable {
     @NotBlank
     @Column(name = "PRECO")
     private BigDecimal preco;
+
+    public Cerveja(String marca, String tipo, int quantidade, BigDecimal preco) {
+    }
 }
