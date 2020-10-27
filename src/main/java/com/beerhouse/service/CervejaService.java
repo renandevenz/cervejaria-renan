@@ -24,16 +24,23 @@ public class CervejaService {
     }
 
     public Cerveja salvar(Cerveja cerveja) {
-        return cervejaRepository.save(cerveja);
+        Optional<Cerveja> cervejaExiste = cervejaRepository.findByMarca(cerveja.getMarca());
+
+        if (!cervejaExiste.equals(cerveja)) {
+            throw new IllegalStateException("O produto já existe");
+        } return cervejaRepository.save(cerveja);
     }
 
     public Cerveja atualizar(Cerveja cerveja, Long id) {
         if (cervejaRepository.findById(id).isPresent()) {
+            cerveja.setId(id);
             return cervejaRepository.saveAndFlush(cerveja);
         } throw new IllegalArgumentException("Não existe um produto para atualizar");
     }
 
     public void deletar(Long id) {
-        cervejaRepository.deleteById(id);
+        if (cervejaRepository.findById(id).isPresent()) {
+            cervejaRepository.deleteById(id);
+        } throw new IllegalArgumentException("Não existe um produto para remover");
     }
 }
