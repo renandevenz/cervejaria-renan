@@ -2,9 +2,11 @@ package com.beerhouse.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Indexed;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -19,21 +21,17 @@ public class Cerveja implements Serializable {
     private long id;
 
     @NotBlank
-    @Column(name = "MARCA")
+    @Column(name = "MARCA", unique = true)
     private String marca;
 
     @NotBlank
     @Column(name = "TIPO")
     private String tipo;
 
-    @NotBlank
-    @Column(name = "QUANTIDADE")
-    private int quantidade;
-
-    @NotBlank
+    @NotNull
     @Column(name = "PRECO")
     private BigDecimal preco;
 
-    public Cerveja(String marca, String tipo, int quantidade, BigDecimal preco) {
+    public Cerveja(String marca, String tipo, BigDecimal preco) {
     }
 }
