@@ -12,6 +12,6 @@ public class CervejaDTO {
     private BigDecimal preco;
 
     public Cerveja cervejaMapper() {
-        return new Cerveja(marca, tipo, quantidade, preco);
+        return new Cerveja(marca, tipo, preco);
     }
 }
