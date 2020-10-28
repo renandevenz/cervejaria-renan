@@ -1,14 +1,14 @@
 package com.beerhouse.repository;
 
-import com.beerhouse.domain.Cerveja;
+import com.beerhouse.entity.CervejaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface CervejaRepository extends JpaRepository<Cerveja, Long> {
+public interface CervejaRepository extends JpaRepository<CervejaEntity, Long> {
 
-    Optional<Cerveja> findById(Long id);
-    Optional<Cerveja> findByMarca(String marca);
+    Optional<CervejaEntity> findById(Long id);
+    Optional<CervejaEntity> findByMarca(String marca);
 }

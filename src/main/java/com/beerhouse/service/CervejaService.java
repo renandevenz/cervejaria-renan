@@ -1,6 +1,6 @@
 package com.beerhouse.service;
 
-import com.beerhouse.domain.Cerveja;
+import com.beerhouse.entity.CervejaEntity;
 import com.beerhouse.repository.CervejaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,27 +16,25 @@ public class CervejaService {
     @Autowired
     private CervejaRepository cervejaRepository;
 
-
-
-    public List<Cerveja> listar() {
+    public List<CervejaEntity> listar() {
         return cervejaRepository.findAll();
     }
 
-    public Optional<Cerveja> buscarPorMarca(String marca) {
+    public Optional<CervejaEntity> buscarPorMarca(String marca) {
         return Optional.ofNullable(cervejaRepository.findByMarca(marca)
                 .orElseThrow(() -> new IllegalArgumentException("Produto inexistente")));
     }
 
-    public Cerveja salvar(Cerveja cerveja) {
-        Optional<Cerveja> cervejaExiste = cervejaRepository.findByMarca(cerveja.getMarca());
+    public CervejaEntity salvar(CervejaEntity cervejaEntity) {
+        Optional<CervejaEntity> cervejaExiste = cervejaRepository.findByMarca(cervejaEntity.getMarca());
 
-        return cervejaRepository.save(cerveja);
+        return cervejaRepository.save(cervejaEntity);
     }
 
-    public Cerveja atualizar(Cerveja cerveja, Long id) {
+    public CervejaEntity atualizar(CervejaEntity cervejaEntity, Long id) {
         if (cervejaRepository.findById(id).isPresent()) {
-            cerveja.setId(id);
-            return cervejaRepository.saveAndFlush(cerveja);
+            cervejaEntity.setId(id);
+            return cervejaRepository.saveAndFlush(cervejaEntity);
         } throw new IllegalArgumentException("Não existe um produto para atualizar");
     }
 

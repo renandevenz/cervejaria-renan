@@ -1,12 +1,10 @@
 package com.beerhouse.service;
 
-import com.beerhouse.domain.Cerveja;
+import com.beerhouse.entity.CervejaEntity;
 import com.beerhouse.repository.CervejaRepository;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -27,15 +25,15 @@ public class CervejaServiceTest {
     private CervejaService cervejaService;
 
     @Mock
-    private Cerveja cerveja;
+    private CervejaEntity cervejaEntity;
 
     @BeforeEach
     public void setup() throws IllegalArgumentException {
 
         cervejaService = new CervejaService(cervejaRepository);
 
-        cerveja = new Cerveja();
-        cerveja.setMarca(MARCA);
+        cervejaEntity = new CervejaEntity();
+        cervejaEntity.setMarca(MARCA);
 
         when(cervejaRepository.findByMarca(MARCA)).thenReturn(Optional.empty());
     }
@@ -43,14 +41,14 @@ public class CervejaServiceTest {
     @Test
     public void salvarClienteComSucesso() throws IllegalArgumentException {
 
-        cervejaService.salvar(cerveja);
-        verify(cervejaRepository).save(cerveja);
+        cervejaService.salvar(cervejaEntity);
+        verify(cervejaRepository).save(cervejaEntity);
     }
 
     @Test
     public void salvarClienteComErro() throws IllegalArgumentException {
 
-        when(cervejaRepository.findByMarca(MARCA)).thenReturn(Optional.ofNullable(cerveja));
-        cervejaService.salvar(cerveja);
+        when(cervejaRepository.findByMarca(MARCA)).thenReturn(Optional.ofNullable(cervejaEntity));
+        cervejaService.salvar(cervejaEntity);
     }
 }
