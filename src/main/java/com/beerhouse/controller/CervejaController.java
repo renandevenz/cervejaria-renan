@@ -4,6 +4,8 @@ import com.beerhouse.domain.Cerveja;
 import com.beerhouse.entity.CervejaEntity;
 import com.beerhouse.mapper.CervejaMapper;
 import com.beerhouse.service.CervejaService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,17 +17,20 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/craftbeer")
+@Api(value = "API Cervejas artesanais do Renan")
 public class CervejaController {
 
     @Autowired
     private CervejaService cervejaService;
 
     @GetMapping
+    @ApiOperation(value = "Retorna uma lista de cervejas")
     public ResponseEntity<List<CervejaEntity>> listar() {
         return ResponseEntity.ok(cervejaService.listar());
     }
 
     @GetMapping("/{marca}")
+    @ApiOperation(value = "Retorna o produto filtrando pela marca")
     public ResponseEntity<CervejaEntity> buscarPorMarca(@PathVariable String marca) {
         Optional<CervejaEntity> cerveja = cervejaService.buscarPorMarca(marca);
 
@@ -34,6 +39,7 @@ public class CervejaController {
     }
 
     @PostMapping
+    @ApiOperation(value = "Salva um produto")
     public ResponseEntity<CervejaEntity> cadastrar(@Valid @RequestBody CervejaMapper cervejaMapper,
                                                    Cerveja cerveja) {
         CervejaEntity cervejaEntity = cervejaService.salvar(CervejaMapper.convert(cerveja));
@@ -42,12 +48,14 @@ public class CervejaController {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation(value = "Atualiza um produto")
     public ResponseEntity<CervejaEntity> atualizar(@PathVariable Long id, @RequestBody CervejaEntity cervejaEntity) {
         cervejaService.atualizar(cervejaEntity, id);
         return ResponseEntity.ok(cervejaEntity);
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Remove um produto")
     public ResponseEntity<CervejaEntity> remover(@PathVariable Long id) {
         cervejaService.deletar(id);
         return ResponseEntity.noContent().build();
