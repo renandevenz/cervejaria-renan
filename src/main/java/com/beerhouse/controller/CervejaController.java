@@ -4,13 +4,11 @@ import com.beerhouse.domain.Cerveja;
 import com.beerhouse.dto.CervejaDTO;
 import com.beerhouse.service.CervejaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
