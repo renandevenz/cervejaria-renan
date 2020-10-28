@@ -1,7 +1,8 @@
 package com.beerhouse.controller;
 
 import com.beerhouse.domain.Cerveja;
-import com.beerhouse.dto.CervejaDTO;
+import com.beerhouse.entity.CervejaEntity;
+import com.beerhouse.mapper.CervejaMapper;
 import com.beerhouse.service.CervejaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,33 +21,34 @@ public class CervejaController {
     private CervejaService cervejaService;
 
     @GetMapping
-    public ResponseEntity<List<Cerveja>> listar() {
+    public ResponseEntity<List<CervejaEntity>> listar() {
         return ResponseEntity.ok(cervejaService.listar());
     }
 
     @GetMapping("/{marca}")
-    public ResponseEntity<Cerveja> buscarPorMarca(@PathVariable String marca) {
-        Optional<Cerveja> cerveja = cervejaService.buscarPorMarca(marca);
+    public ResponseEntity<CervejaEntity> buscarPorMarca(@PathVariable String marca) {
+        Optional<CervejaEntity> cerveja = cervejaService.buscarPorMarca(marca);
 
         return cerveja.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Cerveja> cadastrar(@Valid @RequestBody CervejaDTO cervejaDTO) {
-        Cerveja cerveja = cervejaService.salvar(cervejaDTO.cervejaMapper());
+    public ResponseEntity<CervejaEntity> cadastrar(@Valid @RequestBody CervejaMapper cervejaMapper,
+                                                   Cerveja cerveja) {
+        CervejaEntity cervejaEntity = cervejaService.salvar(CervejaMapper.convert(cerveja));
 
-        return new ResponseEntity<>(cerveja, HttpStatus.CREATED);
+        return new ResponseEntity<>(cervejaEntity, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cerveja> atualizar(@PathVariable Long id, @RequestBody Cerveja cerveja) {
-        cervejaService.atualizar(cerveja, id);
-        return ResponseEntity.ok(cerveja);
+    public ResponseEntity<CervejaEntity> atualizar(@PathVariable Long id, @RequestBody CervejaEntity cervejaEntity) {
+        cervejaService.atualizar(cervejaEntity, id);
+        return ResponseEntity.ok(cervejaEntity);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Cerveja> remover(@PathVariable Long id) {
+    public ResponseEntity<CervejaEntity> remover(@PathVariable Long id) {
         cervejaService.deletar(id);
         return ResponseEntity.noContent().build();
     }
