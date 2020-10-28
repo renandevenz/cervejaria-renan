@@ -2,6 +2,7 @@ package com.beerhouse.service;
 
 import com.beerhouse.domain.Cerveja;
 import com.beerhouse.repository.CervejaRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,10 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@AllArgsConstructor
 public class CervejaService {
 
     @Autowired
     private CervejaRepository cervejaRepository;
+
+
 
     public List<Cerveja> listar() {
         return cervejaRepository.findAll();
@@ -26,9 +30,7 @@ public class CervejaService {
     public Cerveja salvar(Cerveja cerveja) {
         Optional<Cerveja> cervejaExiste = cervejaRepository.findByMarca(cerveja.getMarca());
 
-        if (!cervejaExiste.equals(cerveja)) {
-            throw new IllegalStateException("O produto já existe");
-        } return cervejaRepository.save(cerveja);
+        return cervejaRepository.save(cerveja);
     }
 
     public Cerveja atualizar(Cerveja cerveja, Long id) {
