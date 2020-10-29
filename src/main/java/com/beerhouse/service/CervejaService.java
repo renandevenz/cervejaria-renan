@@ -39,7 +39,7 @@ public class CervejaService {
     }
 
     public void deletar(Long id) {
-        if (cervejaRepository.findById(id).isPresent()) {
+        if (cervejaRepository.findById(id).isEmpty()) {
             cervejaRepository.deleteById(id);
         } throw new IllegalArgumentException("Não existe um produto para remover");
     }
