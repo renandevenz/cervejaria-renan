@@ -5,6 +5,8 @@ import com.beerhouse.repository.CervejaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +33,7 @@ public class CervejaService {
         return cervejaRepository.save(cervejaEntity);
     }
 
+    @Transactional(propagation = Propagation.MANDATORY)
     public CervejaEntity atualizar(CervejaEntity cervejaEntity, Long id) {
         if (cervejaRepository.findById(id).isPresent()) {
             cervejaEntity.setId(id);
