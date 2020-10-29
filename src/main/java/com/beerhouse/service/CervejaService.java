@@ -20,7 +20,6 @@ public class CervejaService {
     private CervejaRepository cervejaRepository;
 
     public List<CervejaEntity> listar() {
-
         return cervejaRepository.findAll();
     }
 
