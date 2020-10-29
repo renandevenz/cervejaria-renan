@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -23,15 +20,12 @@ public class CervejaEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
     @Column(name = "MARCA", unique = true)
     private String marca;
 
-    @NotBlank
     @Column(name = "TIPO")
     private String tipo;
 
-    @NotNull
     @Column(name = "PRECO")
-    private BigDecimal preco;
+    private Double preco;
 }
