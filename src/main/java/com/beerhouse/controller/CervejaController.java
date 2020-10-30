@@ -6,6 +6,7 @@ import com.beerhouse.mapper.CervejaMapper;
 import com.beerhouse.service.CervejaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/craftbeer")
+@Slf4j
 @Api(value = "API Cervejas artesanais do Renan")
 public class CervejaController {
 
@@ -43,7 +45,7 @@ public class CervejaController {
     public ResponseEntity<CervejaEntity> cadastrar(@Valid @RequestBody CervejaMapper cervejaMapper,
                                                    Cerveja cerveja) {
         CervejaEntity cervejaEntity = cervejaService.salvar(CervejaMapper.convert(cerveja));
-
+        log.info("Produto salvo com sucesso! " + cerveja);
         return new ResponseEntity<>(cervejaEntity, HttpStatus.CREATED);
     }
 
