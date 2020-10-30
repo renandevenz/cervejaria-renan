@@ -52,6 +52,7 @@ public class CervejaController {
     @ApiOperation(value = "Atualiza um produto")
     public ResponseEntity<CervejaEntity> atualizar(@PathVariable Long id, @RequestBody CervejaEntity cervejaEntity) {
         cervejaService.atualizar(cervejaEntity, id);
+        log.info("Produto atualizado com sucesso!" + cervejaEntity);
         return ResponseEntity.ok(cervejaEntity);
     }
 
