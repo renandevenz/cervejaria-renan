@@ -16,7 +16,7 @@ import java.util.Objects;
 import static org.springframework.core.GenericTypeResolver.resolveTypeArguments;
 
 @Slf4j
-abstract class AbstractGlobalExceptionHandler<E extends Exception, T> implements RestExceptionHandler<E, T> {
+public abstract class AbstractGlobalExceptionHandler<E extends Exception, T> implements RestExceptionHandler<E, T> {
 
     private static final Logger LOG = LoggerFactory.getLogger(RestExceptionHandler.class);
 
