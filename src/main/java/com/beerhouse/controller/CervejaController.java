@@ -42,8 +42,7 @@ public class CervejaController {
 
     @PostMapping
     @ApiOperation(value = "Salva um produto")
-    public ResponseEntity<CervejaEntity> cadastrar(@Valid @RequestBody CervejaMapper cervejaMapper,
-                                                   Cerveja cerveja) {
+    public ResponseEntity<CervejaEntity> cadastrar(@Valid @RequestBody Cerveja cerveja) {
         CervejaEntity cervejaEntity = cervejaService.salvar(CervejaMapper.convert(cerveja));
         log.info("Produto salvo com sucesso! " + cerveja);
         return new ResponseEntity<>(cervejaEntity, HttpStatus.CREATED);
