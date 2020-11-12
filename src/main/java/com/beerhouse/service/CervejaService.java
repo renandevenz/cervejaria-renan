@@ -15,6 +15,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Scope("singleton")
 public class CervejaService {
 
     @Autowired
