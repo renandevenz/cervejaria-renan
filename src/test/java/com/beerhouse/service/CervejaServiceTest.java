@@ -10,8 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CervejaServiceTest {
@@ -39,14 +38,14 @@ public class CervejaServiceTest {
     }
 
     @Test
-    public void salvarClienteComSucesso() throws IllegalArgumentException {
+    public void salvarCervejaComSucesso() throws IllegalArgumentException {
 
         cervejaService.salvar(cervejaEntity);
         verify(cervejaRepository).save(cervejaEntity);
     }
 
     @Test
-    public void salvarClienteComErro() throws IllegalArgumentException {
+    public void salvarCervejaComErro() throws IllegalArgumentException {
 
         when(cervejaRepository.findByMarca(MARCA)).thenReturn(Optional.ofNullable(cervejaEntity));
         cervejaService.salvar(cervejaEntity);
