@@ -1,6 +1,8 @@
 package com.beerhouse.service;
 
 import com.beerhouse.entity.CervejaEntity;
+import com.beerhouse.exception.ProdutoExistenteException;
+import com.beerhouse.exception.ProdutoInexistenteException;
 import com.beerhouse.repository.CervejaRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -22,33 +24,51 @@ public class CervejaService {
     private CervejaRepository cervejaRepository;
 
     public List<CervejaEntity> listar() {
+
         return cervejaRepository.findAll();
     }
 
     public Optional<CervejaEntity> buscarPorMarca(String marca) {
         return Optional.ofNullable(cervejaRepository.findByMarca(marca)
-                .orElseThrow(() -> new IllegalArgumentException("Produto inexistente")));
+                .orElseThrow(() -> new ProdutoInexistenteException("Produto inexistente" + marca)));
     }
 
     @Transactional
     public CervejaEntity salvar(CervejaEntity cervejaEntity) {
-        Optional<CervejaEntity> cervejaExiste = cervejaRepository.findByMarca(cervejaEntity.getMarca());
 
-        return cervejaRepository.save(cervejaEntity);
+        Optional<CervejaEntity> cervejaExiste = cervejaRepository.findByMarca(cervejaEntity.getMarca());
+        try {
+            if (cervejaExiste.isPresent()) {
+                cervejaRepository.save(cervejaEntity);
+            }
+        } catch (final ProdutoExistenteException e) {
+            e.getMessage();
+        }
+        return cervejaEntity;
     }
 
     @Transactional
-    public CervejaEntity atualizar(CervejaEntity cervejaEntity, Long id) {
-        if (cervejaRepository.findById(id).isPresent()) {
-            cervejaEntity.setId(id);
-            return cervejaRepository.saveAndFlush(cervejaEntity);
-        } throw new IllegalArgumentException("Não existe um produto para atualizar");
+    public void atualizar(CervejaEntity cervejaEntity, Long id) {
+
+        try {
+            if (cervejaRepository.findById(id).isPresent()) {
+                cervejaEntity.setId(id);
+                cervejaRepository.saveAndFlush(cervejaEntity);
+            }
+        } catch (ProdutoInexistenteException e) {
+            e.getMessage();
+        }
     }
 
     @Transactional
     public void deletar(Long id) {
-        if (cervejaRepository.findById(id).isEmpty()) {
-            cervejaRepository.deleteById(id);
-        } throw new IllegalArgumentException("Não existe um produto para remover");
+
+        try {
+            if (cervejaRepository.findById(id).isEmpty()) {
+                cervejaRepository.deleteById(id);
+            }
+        } catch (ProdutoInexistenteException e) {
+            e.getMessage();
+        }
     }
 }
