@@ -43,7 +43,7 @@ public class CervejaService {
             if (cervejaExiste.isPresent()) {
                 cervejaRepository.save(cervejaEntity);
             }
-        } catch (final ProdutoExistenteException e) {
+        } catch (ProdutoExistenteException e) {
             log.debug(e.getMessage());
         }
         return cervejaEntity;
