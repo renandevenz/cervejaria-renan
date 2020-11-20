@@ -6,6 +6,7 @@ import com.beerhouse.exception.ProdutoInexistenteException;
 import com.beerhouse.repository.CervejaRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Slf4j
 @Scope("singleton")
 public class CervejaService {
 
@@ -42,7 +44,7 @@ public class CervejaService {
                 cervejaRepository.save(cervejaEntity);
             }
         } catch (final ProdutoExistenteException e) {
-            e.getMessage();
+            log.debug(e.getMessage());
         }
         return cervejaEntity;
     }
@@ -56,7 +58,7 @@ public class CervejaService {
                 cervejaRepository.saveAndFlush(cervejaEntity);
             }
         } catch (ProdutoInexistenteException e) {
-            e.getMessage();
+            log.debug(e.getMessage());
         }
     }
 
@@ -68,7 +70,7 @@ public class CervejaService {
                 cervejaRepository.deleteById(id);
             }
         } catch (ProdutoInexistenteException e) {
-            e.getMessage();
+            log.debug(e.getMessage());
         }
     }
 }
