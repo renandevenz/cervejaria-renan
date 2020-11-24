@@ -3,6 +3,7 @@ package com.beerhouse.service;
 import com.beerhouse.entity.CervejaEntity;
 import com.beerhouse.repository.CervejaRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -38,6 +39,7 @@ public class CervejaServiceTest {
     }
 
     @Test
+    @DisplayName("Deve salvar o produto com sucesso")
     public void salvarCervejaComSucesso() throws IllegalArgumentException {
 
         cervejaService.salvar(cervejaEntity);
@@ -45,6 +47,7 @@ public class CervejaServiceTest {
     }
 
     @Test
+    @DisplayName("Não deve salvar o produto")
     public void salvarCervejaComErro() throws IllegalArgumentException {
 
         when(cervejaRepository.findByMarca(MARCA)).thenReturn(Optional.ofNullable(cervejaEntity));
