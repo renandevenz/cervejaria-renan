@@ -32,7 +32,7 @@ public class CervejaService {
 
     public Optional<CervejaEntity> buscarPorMarca(String marca) {
         return Optional.ofNullable(cervejaRepository.findByMarca(marca)
-                .orElseThrow(() -> new ProdutoInexistenteException("Produto inexistente" + marca)));
+                .orElseThrow(() -> new ProdutoInexistenteException("Produto inexistente: " + marca)));
     }
 
     @Transactional
