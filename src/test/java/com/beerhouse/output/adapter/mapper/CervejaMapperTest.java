@@ -1,7 +1,7 @@
-package com.beerhouse.mapper;
+package com.beerhouse.output.adapter.mapper;
 
-import com.beerhouse.domain.Cerveja;
-import com.beerhouse.entity.CervejaEntity;
+import com.beerhouse.application.domain.Cerveja;
+import com.beerhouse.output.adapter.entity.CervejaEntity;
 import com.beerhouse.mock.CervejaTO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

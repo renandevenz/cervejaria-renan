@@ -1,6 +1,6 @@
 package com.beerhouse.mock;
 
-import com.beerhouse.domain.Cerveja;
+import com.beerhouse.application.domain.Cerveja;
 
 public class CervejaTO {
 

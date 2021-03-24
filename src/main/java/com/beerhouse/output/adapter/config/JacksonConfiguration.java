@@ -1,4 +1,4 @@
-package com.beerhouse.config;
+package com.beerhouse.output.adapter.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.openapitools.jackson.nullable.JsonNullableModule;

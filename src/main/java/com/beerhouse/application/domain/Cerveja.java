@@ -1,4 +1,4 @@
-package com.beerhouse.domain;
+package com.beerhouse.application.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -21,5 +22,5 @@ public class Cerveja {
     private String tipo;
 
     @NotNull
-    private Double preco;
+    private BigDecimal preco;
 }

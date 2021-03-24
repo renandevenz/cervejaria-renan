@@ -1,4 +1,4 @@
-package com.beerhouse.entity;
+package com.beerhouse.output.adapter.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -14,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Table(name = "TB_CERVEJAS")
-public class CervejaEntity implements Serializable {
+public class CervejaEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,5 +27,5 @@ public class CervejaEntity implements Serializable {
     private String tipo;
 
     @Column(name = "PRECO")
-    private Double preco;
+    private BigDecimal preco;
 }
