@@ -1,6 +1,6 @@
-package com.beerhouse.output.adapter.entity.repository;
+package com.beerhouse.adapter.output.repository;
 
-import com.beerhouse.output.adapter.entity.CervejaEntity;
+import com.beerhouse.adapter.output.entity.CervejaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
