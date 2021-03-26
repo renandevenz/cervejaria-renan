@@ -1,4 +1,4 @@
-package com.beerhouse.output.adapter.config;
+package com.beerhouse.infra.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
