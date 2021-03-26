@@ -1,6 +1,6 @@
 package com.beerhouse.application.usecase;
 
-import com.beerhouse.application.domain.Cerveja;
+import com.beerhouse.domain.Cerveja;
 
 public interface BuscarUseCase {
 
