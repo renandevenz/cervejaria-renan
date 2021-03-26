@@ -1,4 +1,4 @@
-package com.beerhouse.output.adapter.entity;
+package com.beerhouse.adapter.output.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
