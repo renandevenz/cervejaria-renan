@@ -1,12 +1,13 @@
 package com.beerhouse.application.service;
 
-import com.beerhouse.application.domain.Cerveja;
+import com.beerhouse.adapter.output.entity.CervejaEntity;
+import com.beerhouse.application.port.FindCervejaPort;
 import com.beerhouse.application.usecase.BuscarUseCase;
 import com.beerhouse.application.usecase.ListarUseCase;
-import com.beerhouse.output.adapter.entity.CervejaEntity;
-import com.beerhouse.output.adapter.port.CervejaPort;
-import com.beerhouse.output.adapter.port.ListarCervejasPort;
+import com.beerhouse.domain.Cerveja;
+import com.beerhouse.exception.BaseException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -14,24 +15,26 @@ import java.util.Collection;
 
 @Component
 @RequiredArgsConstructor
+@Log
 public class CervejaService implements BuscarUseCase, ListarUseCase {
 
     private Converter<Cerveja, CervejaEntity> converter;
-    private final CervejaPort port;
-    private final ListarCervejasPort cervejasPort;
+    private final FindCervejaPort port;
 
     @Override
     public void buscarProduto(Cerveja produto) {
+
         try {
             final CervejaEntity entity = converter.convert(produto);
-            port.convert(entity);
-        } catch (Exception e) {
-            e.getMessage();
+            port.entity(entity);
+        } catch (BaseException e) {
+            log.severe(e.getMessage());
         }
     }
 
     @Override
     public Collection<Cerveja> listar() {
-        return cervejasPort.listar();
+
+        return port.listar();
     }
 }
