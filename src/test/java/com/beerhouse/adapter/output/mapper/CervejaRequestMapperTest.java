@@ -1,12 +1,12 @@
-package com.beerhouse.output.adapter.mapper;
+package com.beerhouse.adapter.output.mapper;
 
 import com.beerhouse.application.domain.Cerveja;
-import com.beerhouse.output.adapter.entity.CervejaEntity;
+import com.beerhouse.adapter.output.entity.CervejaEntity;
 import com.beerhouse.mock.CervejaTO;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class CervejaMapperTest {
+public class CervejaRequestMapperTest {
 
     @Test
     void comparaCamposCervejaMapper() {

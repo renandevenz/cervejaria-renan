@@ -1,9 +1,9 @@
 package com.beerhouse.application;
 
+import com.beerhouse.adapter.output.entity.CervejaEntity;
+import com.beerhouse.adapter.output.repository.CervejaRepository;
 import com.beerhouse.application.service.CervejaService;
-import com.beerhouse.output.adapter.entity.CervejaEntity;
-import com.beerhouse.output.adapter.entity.repository.CervejaRepository;
-import com.beerhouse.application.domain.Cerveja;
+import com.beerhouse.domain.Cerveja;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public class CervejaServiceTest {
+public class CervejaRequestServiceTest {
 
     private static final String MARCA = "Heineken";
 
@@ -48,7 +48,7 @@ public class CervejaServiceTest {
     @DisplayName("Deve salvar o produto com sucesso")
     public void salvarCervejaComSucesso() throws IllegalArgumentException {
 
-        cervejaService.salvar(cerveja);
+        cervejaService.buscarProduto(cerveja);
         verify(cervejaRepository).save(cervejaEntity);
     }
 
@@ -57,6 +57,6 @@ public class CervejaServiceTest {
     public void salvarCervejaComErro() throws IllegalArgumentException {
 
         when(cervejaRepository.findByMarca(MARCA)).thenReturn(Optional.ofNullable(cervejaEntity));
-        cervejaService.salvar(cerveja);
+        cervejaService.buscarProduto(cerveja);
     }
 }

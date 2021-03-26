@@ -1,9 +1,9 @@
 package com.beerhouse.input;
 
-import com.beerhouse.output.adapter.mapper.CervejaMapper;
+import com.beerhouse.adapter.input.mapper.CervejaRequestMapper;
 import com.beerhouse.application.service.CervejaService;
-import com.beerhouse.output.adapter.entity.CervejaEntity;
-import com.beerhouse.application.domain.Cerveja;
+import com.beerhouse.domain.Cerveja;
+import com.beerhouse.domain.Tipo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,13 +19,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.math.BigDecimal;
+
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
 @WebMvcTest
 @AutoConfigureMockMvc
-public class CervejaControllerTest {
+public class CervejaRequestControllerTest {
 
     static String API = "/craftbeer";
 
@@ -33,7 +35,10 @@ public class CervejaControllerTest {
     MockMvc mockMvc;
 
     @Mock
-    CervejaService cervejaService;
+    CervejaService service;
+
+    @Mock
+    CervejaRequestMapper mapper;
 
     @Test
     @DisplayName("Deve salvar um produto com sucesso")
@@ -41,13 +46,9 @@ public class CervejaControllerTest {
 
         Cerveja cerveja = Cerveja.builder()
                 .marca("Itaipava")
-                .tipo("Pilsen")
-                .preco(1.1)
+                .tipo(Tipo.valueOf("Pilsen"))
+                .preco(BigDecimal.valueOf(1.1))
                 .build();
-
-        CervejaEntity mapper = CervejaMapper.convert(cerveja);
-
-//        BDDMockito.given(cervejaService.salvar(Mockito.any(Cerveja.class))).willReturn(mapper);
 
         String json = new ObjectMapper().writeValueAsString(mapper);
 
@@ -58,6 +59,6 @@ public class CervejaControllerTest {
                 .content(json);
 
         mockMvc.perform(request)
-                .andExpect(status().isCreated());
+                .andExpect(status().isOk());
     }
 }
